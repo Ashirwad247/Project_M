@@ -1,5 +1,5 @@
-import {gsap, Flip, RoughEase, TweenLite} from "./node_modules/gsap/all.js"
-import {Power4, Power3, Expo} from "./node_modules/gsap/index.js"
+import { gsap, Flip, RoughEase, TweenLite } from "./node_modules/gsap/all.js"
+import { Power4, Power3, Expo } from "./node_modules/gsap/index.js"
 gsap.registerPlugin(Flip)
 
 
@@ -8,118 +8,133 @@ const signupButton = document.querySelector('.sign')
 const LogButton = document.querySelector('.log')
 const cards = document.querySelectorAll('.cards')
 
+// async function bola() {
+//     try {
+//         const res = await fetch('https://dummyjson.com/products?limit:12');
+//         if (!res.ok) {
+//             throw new Error(`HTTP error! status: ${res.status}`);
+//         }
+//         const data = await res.json();
+//         cards.querySelector('img').src = ''
+//         // console.log(data);
+//     } catch (error) {
+//         console.error('An error occurred:', error);
+//     }
+// }
+
+// bola();
 
 
-signupButton.addEventListener('click', ()=>{
-    
-    
+
+signupButton.addEventListener('click', () => {
+
+
     signupButton.classList.add('ssign')
 
-    gsap.to(signupButton,0.2,{ 'borderRadius':50, scale:100.5, backgroundColor: 'rgb(155, 181, 155)', color:' rgb(155, 181, 155)',ease:Power4.easeOut  })
+    gsap.to(signupButton, 0.2, { 'borderRadius': 50, scale: 100.5, backgroundColor: 'rgb(155, 181, 155)', color: ' rgb(155, 181, 155)', ease: Power4.easeOut })
     LogButton.style.opacity = '0'
     setTimeout(() => {
-                window.location.href = "./register.html";
-                
-            }, 500);
-        
+        window.location.href = "./register.html";
+
+    }, 500);
+
 
 })
 
 
 
 
-LogButton.addEventListener('click', ()=>{
+LogButton.addEventListener('click', () => {
 
     LogButton.classList.add('llog')
-    cards.forEach((card)=>{
+    cards.forEach((card) => {
         card.style.opacity = '0'
 
     })
-   
 
-    gsap.to(LogButton,0.2,{ 'borderRadius':50,  backgroundColor: 'rgb(255, 255, 255)', color:'  rgb(93, 252, 112)', scale:100.5,backgroundColor:'rgb(93, 252, 112)', opacity:0.7,ease:Power3.easeOut  })
+
+    gsap.to(LogButton, 0.2, { 'borderRadius': 50, backgroundColor: 'rgb(255, 255, 255)', color: '  rgb(93, 252, 112)', scale: 100.5, backgroundColor: 'rgb(93, 252, 112)', opacity: 0.7, ease: Power3.easeOut })
     setTimeout(() => {
-                window.location.href ="./login.html";
-                
-                
-            }, 500);
-        
-    
-    
-    
-    
-   
+        window.location.href = "./login.html";
+
+
+    }, 500);
+
+
+
+
+
+
 })
 
 let itemShower = document.querySelector('.gitems')
 let searchButton = document.querySelector('.search-btn')
-let nfDiv =document.querySelector('.nfd')
+let nfDiv = document.querySelector('.nfd')
 let iShowStyle = itemShower.innerHTML
-searchButton.addEventListener('click', ()=>{
+searchButton.addEventListener('click', () => {
     Searcher()
 
 
 
 })
 
-document.addEventListener('click',()=>{
-    document.addEventListener("keypress", function(e){
-        if(e.key=="Enter" || e.keyCode == 13){
+document.addEventListener('click', () => {
+    document.addEventListener("keypress", function (e) {
+        if (e.key == "Enter" || e.keyCode == 13) {
             Searcher()
         }
     })
 })
 
 
-function Searcher(){
-    let ndflag=false
+function Searcher() {
+    let ndflag = false
     console.log('called')
-    itemShower.innerHTML=iShowStyle
+    itemShower.innerHTML = iShowStyle
     let searcBar = document.querySelector('.searchbar').value.toLowerCase()
     console.log(searcBar)
-    cards.forEach((card)=>{
-        let Ishower=itemShower.innerHTML
-        let itemName =card.querySelector('.lf .i-name').innerHTML.toLowerCase()
+    cards.forEach((card) => {
+        let Ishower = itemShower.innerHTML
+        let itemName = card.querySelector('.lf .i-name').innerHTML.toLowerCase()
         console.log(itemName)
-        if(itemName == searcBar)
-        {   
-          ndflag =true
-          itemShower.innerHTML=''
-          itemShower.appendChild(card)
+        if (itemName == searcBar) {
+            ndflag = true
+            itemShower.innerHTML = ''
+            itemShower.appendChild(card)
         }
-    
-     
+
+
     })
-    if(ndflag!=true){
+    if (ndflag != true) {
         nfDiv.classList.add('nshow')
         setTimeout(() => {
             nfDiv.classList.remove('nshow')
         }, 3000);
     }
 
-   
+
 }
 
 
-  
 
 
 
-cards.forEach((card, index)=>{
 
-    card.addEventListener('click',()=>{
-        const state = Flip .getState(cards);
+cards.forEach((card, index) => {
+
+    card.addEventListener('click', () => {
+        const state = Flip.getState(cards);
         //
         const isCardActive = card.classList.contains("active")
 
-        cards.forEach((otherCard, OtherIdx)=>{
+        cards.forEach((otherCard, OtherIdx) => {
             otherCard.classList.remove('active')
             otherCard.classList.remove('is-inactive')
-            if(!isCardActive && index!==OtherIdx) otherCard.classList.add('is-inactive')
+            if (!isCardActive && index !== OtherIdx) otherCard.classList.add('is-inactive')
         });
-        if(!isCardActive) card.classList.add('active')
+        if (!isCardActive) card.classList.add('active')
         // Flip.to(state,{ duration:0.4,  ease:easeOut})
-    
+
     })
 
 })
@@ -129,21 +144,21 @@ let AddB = document.querySelectorAll('.add-c')
 let BuyB = document.querySelectorAll('.buy-i')
 let dummyDiv = document.querySelector('.dummy')
 let closeButton = document.querySelector('.x-btn')
-AddB.forEach((button)=>{
+AddB.forEach((button) => {
     console.log('button-clickded')
-    button.addEventListener('click',()=>{
+    button.addEventListener('click', () => {
         dummyDiv.style.display = 'flex'
-        gsap.fromTo('.popup', {y:-20, opacity:0}, {y:0, opacity:1})
+        gsap.fromTo('.popup', { y: -20, opacity: 0 }, { y: 0, opacity: 1 })
 
     })
 })
 
 
-BuyB.forEach((button)=>{
+BuyB.forEach((button) => {
     console.log('button-clickded')
-    button.addEventListener('click',()=>{
+    button.addEventListener('click', () => {
         dummyDiv.style.display = 'flex'
-        gsap.fromTo('.popup', {y:-20, opacity:0}, {y:0, opacity:1})
+        gsap.fromTo('.popup', { y: -20, opacity: 0 }, { y: 0, opacity: 1 })
 
     })
 })
@@ -152,11 +167,11 @@ BuyB.forEach((button)=>{
 
 
 
-closeButton.addEventListener('click',()=>{
-    gsap.fromTo('.popup', {y:0, opacity:1},{y:-20, opacity:0})
+closeButton.addEventListener('click', () => {
+    gsap.fromTo('.popup', { y: 0, opacity: 1 }, { y: -20, opacity: 0 })
     setTimeout(() => {
-    dummyDiv.style.display = 'none'
-        
+        dummyDiv.style.display = 'none'
+
     }, 1000);
     // gsap.to('.popup', {opacity:1})
 })
